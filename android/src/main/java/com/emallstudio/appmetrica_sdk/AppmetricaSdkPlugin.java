@@ -35,6 +35,11 @@ public class AppmetricaSdkPlugin implements MethodCallHandler {
 
     /** Plugin registration. */
     public static void registerWith(Registrar registrar) {
+          // skip for bg services
+        if(registrar.activity() == null) {
+            return;
+        }
+
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "emallstudio.com/appmetrica_sdk");
         channel.setMethodCallHandler(new AppmetricaSdkPlugin(registrar));
     }
